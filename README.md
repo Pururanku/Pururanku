@@ -1,16 +1,52 @@
-## Hi there 👋
+<!-- ===================================================== -->
+<!--                  PURURANKU.EXE                         -->
+<!--        Somehow this README actually compiled.          -->
+<!-- ===================================================== -->
 
-<!--
-**Pururanku/Pururanku** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<div align="center">
 
-Here are some ideas to get you started:
+# 👋 Hi, I'm Pururanku
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+### Developer by choice. Bug creator by accident.
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&center=true&vCenter=true&width=500&lines=Turning+ideas+into+code...;Turning+code+into+bugs...;Turning+bugs+into+features...;It+works+on+my+machine+%F0%9F%A4%B7" alt="Typing SVG" />
+
+<br>
+
+![Profile Views](https://komarev.com/ghpvc/?username=Pururanku&label=Profile%20Stalkers&style=flat-square)
+
+</div>
+
+---
+
+## 🧑‍💻 About Me
+
+```python
+class Pururanku:
+
+    def __init__(self):
+        self.username = "Pururanku"
+        self.role = "Developer"
+        self.location = "Philippines 🇵🇭"
+
+        self.interests = [
+            "Programming",
+            "Artificial Intelligence",
+            "Data Science",
+            "Web Development",
+            "Technology",
+            "Gaming"
+        ]
+
+        self.current_status = "Probably debugging something"
+
+    def daily_routine(self):
+        return [
+            "Open laptop",
+            "Write code",
+            "Get error",
+            "Google error",
+            "Fix error",
+            "Create 3 new errors",
+            "Repeat"
+        ]
