@@ -7,7 +7,7 @@
 
 # 👋 Hi, I'm Pururanku
 
-### Developer by choice. Bug creator by accident.
+### IT SA Umaga, Adonis Dancer sa Gabi
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&center=true&vCenter=true&width=500&lines=Turning+ideas+into+code...;Turning+code+into+bugs...;Turning+bugs+into+features...;It+works+on+my+machine+%F0%9F%A4%B7" alt="Typing SVG" />
 
