@@ -43,10 +43,13 @@ class Pururanku:
     def daily_routine(self):
         return [
             "Open laptop",
+            "Lu2",
+            "Eat",
             "Write code",
             "Get error",
             "Google error",
             "Fix error",
             "Create 3 new errors",
             "Repeat"
+            "Sleep",
         ]
