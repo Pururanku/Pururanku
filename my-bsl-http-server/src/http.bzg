@@ -1,0 +1,143 @@
+include("lib/socket.bzg");
+
+// 1. Initialize Socket
+if (socket_init() < 0) {
+    print("Socket Initialization Failed\n");
+}
+else {
+    print("Socket Ready\n");
+}
+
+// 2. Create Server Socket
+var server = socket_create();
+
+if (server < 0) {
+    print("Socket Creation Failed\n");
+}
+
+// 3. Bind to Port 8080
+if (socket_bind(server, 0, 8080) < 0) {
+    print("Socket Bind Failed\n");
+}
+
+// 4. Listen
+if (socket_listen(server, 5) < 0) {
+    print("Socket Listen Failed\n");
+}
+
+print("Server running on http://localhost:8080/\n");
+
+// Keep server running
+while (1) {
+
+    // 5. Accept connection
+    var client = socket_accept(server);
+
+    print("Client connected!\n");
+
+    // 6. Read browser request
+    var data = socket_read(client, 1024);
+
+    if (sizeof(data) >= 0) {
+
+        print("Received Request:\n" + data);
+
+        var BODY = "";
+        var HTTP = "";
+
+        // Extract requested route
+        var match = regex("/.* HTTP/1.1", data);
+        var path = substr(match, 0, sizeof(match) - 9);
+
+        print("Requested Path: " + path + "\n");
+
+        // =====================================
+        // HOME PAGE
+        // =====================================
+        if (path == "/") {
+
+            BODY =
+                "<!DOCTYPE html>"
+                +"<html>"
+                +"<head>"
+                +"<title>BSL Server - Home</title>"
+                +"</head>"
+                +"<body style=\"font-family:Arial;text-align:center;padding:50px;\">"
+                +"<h1 style=\"color:#0f766e;\">Welcome to BSL HTTP Server</h1>"
+                +"<p>This is the default landing page served on route /</p>"
+                +"<p><a href=\"/about\">About Page</a></p>"
+                +"</body>"
+                +"</html>";
+
+            HTTP =
+                "HTTP/1.1 200 OK\r\n"
+                +"Content-Type: text/html\r\n"
+                +"Content-Length: "+ sizeof(BODY) +"\r\n"
+                +"Connection: close\r\n"
+                +"\r\n";
+        }
+
+        // =====================================
+        // ABOUT PAGE
+        // =====================================
+        else if (path == "/about") {
+
+            BODY =
+                "<!DOCTYPE html>"
+                +"<html>"
+                +"<head>"
+                +"<title>BSL Server - About</title>"
+                +"</head>"
+                +"<body style=\"font-family:Arial;text-align:center;padding:50px;\">"
+                +"<h1 style=\"color:#0f766e;\">About BSL HTTP Server</h1>"
+                +"<p>This project demonstrates a custom HTTP server created using the Bonezegei Scripting Language.</p>"
+                +"<p>The server uses TCP sockets to receive HTTP requests and return web pages.</p>"
+                +"<p><a href=\"/\">Back to Home</a></p>"
+                +"</body>"
+                +"</html>";
+
+            HTTP =
+                "HTTP/1.1 200 OK\r\n"
+                +"Content-Type: text/html\r\n"
+                +"Content-Length: "+ sizeof(BODY) +"\r\n"
+                +"Connection: close\r\n"
+                +"\r\n";
+        }
+
+        // =====================================
+        // 404 PAGE
+        // =====================================
+        else {
+
+            BODY =
+                "<!DOCTYPE html>"
+                +"<html>"
+                +"<head>"
+                +"<title>404 Not Found</title>"
+                +"</head>"
+                +"<body style=\"font-family:Arial;text-align:center;padding:50px;\">"
+                +"<h1 style=\"color:#e11d48;\">404 - Page Not Found</h1>"
+                +"<p>The requested route does not exist on this BSL Server.</p>"
+                +"<p><a href=\"/\">Return Home</a></p>"
+                +"</body>"
+                +"</html>";
+
+            HTTP =
+                "HTTP/1.1 404 Not Found\r\n"
+                +"Content-Type: text/html\r\n"
+                +"Content-Length: "+ sizeof(BODY) +"\r\n"
+                +"Connection: close\r\n"
+                +"\r\n";
+        }
+
+        // Send response
+        socket_write(client, HTTP + BODY, sizeof(HTTP + BODY));
+
+        // Close this client's connection
+        socket_close(client);
+
+        gc();
+    }
+}
+
+socket_cleanup();
